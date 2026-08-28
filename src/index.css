@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Outfit", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  
+  --color-gold-amber: #FFC107;
+  --color-gold-dark: #B38600;
+  --color-gold-light: #FFE082;
+  --color-terminal-bg: #111111;
+  --color-terminal-surface: #181818;
+  --color-terminal-border: #2c2c2c;
+}
+
+body {
+  background-color: var(--color-terminal-bg);
+  color: #f3f4f6;
+  font-family: var(--font-sans);
+  overscroll-behavior: none;
+  overscroll-behavior-y: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Allow text selection in inputs, textareas and note cards */
+input, textarea, p, h1, h2, h3, h4, h5, h6, span {
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+/* Safe area inset utilities for mobile notches and gesture bars */
+.pt-safe {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+.pl-safe {
+  padding-left: env(safe-area-inset-left, 0px);
+}
+.pr-safe {
+  padding-right: env(safe-area-inset-right, 0px);
+}
+
+button, a {
+  touch-action: manipulation;
+}
+
+/* Custom scrollbars for a highly polished dark UI */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #111111;
+}
+::-webkit-scrollbar-thumb {
+  background: #2a2a2a;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3a3a3a;
+}

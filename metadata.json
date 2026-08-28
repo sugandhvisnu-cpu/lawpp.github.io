@@ -1,0 +1,6 @@
+{
+  "name": "Lawpp",
+  "description": "Litigation portfolio and calendar manager for Indian advocates with Case Number Record (CNR) tracking and Google Calendar sync.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

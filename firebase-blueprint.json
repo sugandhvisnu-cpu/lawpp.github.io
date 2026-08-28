@@ -1,0 +1,111 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "Indian advocate profile information",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "description": "Firebase Auth unique identifier"
+        },
+        "name": {
+          "type": "string",
+          "description": "Full name of the advocate"
+        },
+        "email": {
+          "type": "string",
+          "description": "Email address"
+        },
+        "bar_id": {
+          "type": "string",
+          "description": "Bar Council registration number"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the user registered"
+        }
+      },
+      "required": ["uid", "name", "email", "bar_id", "created_at"]
+    },
+    "Case": {
+      "title": "Case",
+      "description": "Court case tracked via Case Number Record (CNR)",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "16-character Case Number Record (CNR) identifier"
+        },
+        "user_id": {
+          "type": "string",
+          "description": "Advocate's user ID"
+        },
+        "client_name": {
+          "type": "string",
+          "description": "Internal name or tags of the client"
+        },
+        "case_title": {
+          "type": "string",
+          "description": "Title of the litigation matter (e.g. State vs John)"
+        },
+        "court_name": {
+          "type": "string",
+          "description": "Name of the court complex and courtroom"
+        },
+        "next_hearing_date": {
+          "type": "string",
+          "format": "date",
+          "description": "Next scheduled date of hearing (YYYY-MM-DD)"
+        },
+        "case_stage": {
+          "type": "string",
+          "description": "Current status or stage of the case"
+        },
+        "petitioner": {
+          "type": "string",
+          "description": "Name or details of the petitioner"
+        },
+        "petitioner_name": {
+          "type": "string",
+          "description": "Clean petitioner name"
+        },
+        "respondent_name": {
+          "type": "string",
+          "description": "Clean respondent name"
+        },
+        "advocate_notes": {
+          "type": "string",
+          "description": "Markdown notes maintained by the advocate"
+        },
+        "last_updated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp of the last sync or update"
+        }
+      },
+      "required": [
+        "id",
+        "user_id",
+        "client_name",
+        "case_title",
+        "court_name",
+        "next_hearing_date",
+        "case_stage",
+        "advocate_notes",
+        "last_updated"
+      ]
+    }
+  },
+  "firestore": {
+    "users/{userId}": {
+      "schema": "User",
+      "description": "Advocate users collection indexed by UID"
+    },
+    "cases/{caseId}": {
+      "schema": "Case",
+      "description": "Litigation cases indexed by CNR number"
+    }
+  }
+}
