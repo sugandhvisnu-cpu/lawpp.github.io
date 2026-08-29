@@ -90,3 +90,11 @@ export async function logout() {
 export function getAccessToken(): string | null {
   return null;
 }
+
+export async function getFreshAccessToken(): Promise<string | null> {
+  if (auth.currentUser) {
+    return await auth.currentUser.getIdToken(true);
+  }
+  return null;
+}
+
