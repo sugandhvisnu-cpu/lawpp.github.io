@@ -10,10 +10,7 @@ import {
   User 
 } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
-import { Capacitor } from '@capacitor/core';
-import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
 
-// Your existing Firebase configuration
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || "lawppog.firebaseapp.com",
@@ -43,42 +40,32 @@ export function handleFirestoreError(error: unknown, op: OperationType, path: st
 }
 
 export async function googleSignIn() {
-  if (Capacitor.isNativePlatform()) {
-    const googleUser = await GoogleAuth.signIn();
-    return {
-      user: auth.currentUser!,
-      accessToken: googleUser.authentication.accessToken
-    };
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  if (isMobile) {
+    await signInWithRedirect(auth, provider);
+    return null;
   } else {
-    const isMobileBrowser = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    if (isMobileBrowser) {
-      await signInWithRedirect(auth, provider);
-      return null;
-    } else {
-      const result = await signInWithPopup(auth, provider);
+    const result = await signInWithPopup(auth, provider);
+    const credential = GoogleAuthProvider.credentialFromResult(result);
+    return {
+      user: result.user,
+      accessToken: credential?.accessToken || null
+    };
+  }
+}
+
+export async function checkRedirectResult() {
+  try {
+    const result = await getRedirectResult(auth);
+    if (result) {
       const credential = GoogleAuthProvider.credentialFromResult(result);
       return {
         user: result.user,
         accessToken: credential?.accessToken || null
       };
     }
-  }
-}
-
-export async function checkRedirectResult() {
-  if (!Capacitor.isNativePlatform()) {
-    try {
-      const result = await getRedirectResult(auth);
-      if (result) {
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        return {
-          user: result.user,
-          accessToken: credential?.accessToken || null
-        };
-      }
-    } catch (error) {
-      console.error("Redirect login resolution error:", error);
-    }
+  } catch (error) {
+    console.error("Redirect login resolution error:", error);
   }
   return null;
 }
