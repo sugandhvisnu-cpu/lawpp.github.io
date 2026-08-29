@@ -186,7 +186,6 @@ export default function App() {
     return () => unsubscribe();
   }, [user?.uid]);
 
-  // Auth setup & mobile redirect handler
   useEffect(() => {
     checkRedirectResult().then(async (result) => {
       if (result && result.user) {
@@ -548,4 +547,6 @@ export default function App() {
             </h2>
           </div>
 
-          <div className="flex items-center gap-4
+          <div className="flex items-center gap-4">
+            <HeaderClock />
+           
