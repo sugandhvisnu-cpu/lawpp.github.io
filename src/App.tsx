@@ -41,7 +41,6 @@ export default function App() {
   const [isLoggingIn, setIsLoggingIn] = useState<boolean>(false);
   const [isLoadingData, setIsLoadingData] = useState<boolean>(false);
 
-  // Add Case Modal state
   const [isAddModalOpen, setIsAddModalOpen] = useState<boolean>(false);
   const [modalCnr, setModalCnr] = useState<string>('');
   const [modalClientName, setModalClientName] = useState<string>('');
